@@ -1,25 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LimitedMovement : MonoBehaviour
 {
-    public float[] positions = { -6, -4, -2, 0, 2, 4, 6 }; // possible positions
-    private int currentIndex = 3; // start at the center position (0)
+    private float[] horizontalPositions = { -9, -6, -3, 0, 3, 6, 9 }; // possible horizontal positions
+    private float[] verticalPositions = { -6, -4, -2, 0, 2, 4, 6 }; // possible vertical positions
+    private int currentHorizontalIndex = 3; // start at the center horizontal position (0)
+    private int currentVerticalIndex = 0; // start at the center vertical position (0)
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            currentIndex--;
-            currentIndex = Mathf.Clamp(currentIndex, 0, 6);
-            transform.position = new Vector3(positions[currentIndex], transform.position.y, transform.position.z);
+            currentHorizontalIndex--;
+            currentHorizontalIndex = Mathf.Clamp(currentHorizontalIndex, 0, 6);
+            transform.localPosition = new Vector3(horizontalPositions[currentHorizontalIndex], transform.localPosition.y, transform.localPosition.z);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            currentIndex++;
-            currentIndex = Mathf.Clamp(currentIndex, 0, 6);
-            transform.position = new Vector3(positions[currentIndex], transform.position.y, transform.position.z);
+            currentHorizontalIndex++;
+            currentHorizontalIndex = Mathf.Clamp(currentHorizontalIndex, 0, 6);
+            transform.localPosition = new Vector3(horizontalPositions[currentHorizontalIndex], transform.localPosition.y, transform.localPosition.z);
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            currentVerticalIndex++;
+            currentVerticalIndex = Mathf.Clamp(currentVerticalIndex, 0, 6);
+            transform.localPosition = new Vector3(transform.localPosition.x, verticalPositions[currentVerticalIndex], transform.localPosition.z);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            currentVerticalIndex--;
+            currentVerticalIndex = Mathf.Clamp(currentVerticalIndex, 0, 6);
+            transform.localPosition = new Vector3(transform.localPosition.x, verticalPositions[currentVerticalIndex], transform.localPosition.z);
         }
     }
 }

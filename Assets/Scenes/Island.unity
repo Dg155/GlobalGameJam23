@@ -389,7 +389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10bf976d7f7047c488f6d053cd045b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 1
   distanceBetweenRoots: 1
   timeBetweenRoots: 1
   rootPrefab: {fileID: 2955447356483513461, guid: 9da78bbe08e46e142911f82da8c19147, type: 3}

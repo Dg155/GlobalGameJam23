@@ -11,8 +11,6 @@ public class SnakeRoots : MonoBehaviour
     private List<Transform> roots = new List<Transform>();
     private Vector3 direction = Vector3.right;
     private float timeSinceLastRoot = 0f;
-    private bool isMoving = false;
-    private Vector3 spawnPosition = Vector3.zero;
 
     private void Start()
     {
@@ -25,50 +23,45 @@ public class SnakeRoots : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && direction != Vector3.down)
         {
             direction = Vector3.up;
-            MoveRoots();
+            MoveHead();
         }
         else if (Input.GetKey(KeyCode.S) && direction != Vector3.up)
         {
             direction = Vector3.down;
-            MoveRoots();
+            MoveHead();
         }
         else if (Input.GetKey(KeyCode.A) && direction != Vector3.right)
         {
             direction = Vector3.left;
-            MoveRoots();
+            MoveHead();
         }
         else if (Input.GetKey(KeyCode.D) && direction != Vector3.left)
         {
             direction = Vector3.right;
-            MoveRoots();
+            MoveHead();
         }
 
-        if (Input.anyKey)
+        timeSinceLastRoot += Time.deltaTime;
+        if (timeSinceLastRoot >= timeBetweenRoots)
         {
-            timeSinceLastRoot += Time.deltaTime;
-            if (timeSinceLastRoot >= timeBetweenRoots)
-            {
-                AddRoot();
-                timeSinceLastRoot = 0f;
-            }
+            AddRoot();
+            timeSinceLastRoot = 0f;
         }
     }
 
-    private void MoveRoots()
+    private void MoveHead()
     {
-        Vector3 previousRootPosition = roots[0].position;
-        roots[0].position += direction * speed * Time.deltaTime;
+        Transform firstRoot = roots[0];
+        firstRoot.position += direction * speed * Time.deltaTime;
 
+        Vector3 previousRootPosition = firstRoot.position;
         for (int i = 1; i < roots.Count; i++)
         {
             Transform currentRoot = roots[i];
-            Vector3 currentRootPosition = currentRoot.position;
-
             currentRoot.position = previousRootPosition - (direction * distanceBetweenRoots);
-            previousRootPosition = currentRootPosition;
+            previousRootPosition = currentRoot.position;
         }
     }
-
 
     private void AddRoot()
     {
