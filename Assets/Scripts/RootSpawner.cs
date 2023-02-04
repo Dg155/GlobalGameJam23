@@ -7,6 +7,7 @@ public class RootSpawner : MonoBehaviour
     public float[] verticalLanes = new float[7]; // array of vertical lanes
     private float spawnInterval = 1.5f; // time interval between each spawn
     private float timer = 0.0f; // timer to keep track of time
+    private int lastRandomLane = -1; // keeps track of the last random lane selected
 
     void Update()
     {
@@ -14,6 +15,13 @@ public class RootSpawner : MonoBehaviour
         if (timer >= spawnInterval)
         {
             int randomLane = Random.Range(0, 7); // choose a random lane
+            // ensure that the new random lane is different from the last one
+            while (randomLane == lastRandomLane)
+            {
+                randomLane = Random.Range(0, 7);
+            }
+            lastRandomLane = randomLane; // update the last random lane
+
             int randomDirection = Random.Range(0, 2); // choose a random direction
 
             if (randomDirection == 0)
