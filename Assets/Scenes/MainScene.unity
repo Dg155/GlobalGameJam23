@@ -615,13 +615,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootPrefab: {fileID: 2955447356483513461, guid: 9da78bbe08e46e142911f82da8c19147, type: 3}
   horizontalLanes:
-  - -9
-  - -6
-  - -3
   - 0
-  - 3
-  - 6
-  - 9
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   verticalLanes:
   - -6
   - -4
