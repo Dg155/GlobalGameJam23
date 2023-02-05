@@ -115,4 +115,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootSFX: {fileID: 8300000, guid: 8a9e6d5d5f99d3644adc3ce668419475, type: 3}
-  oneSquareHit: {fileID: 8292828404451750907, guid: 52988b724b575da42b9b92c1bdd23b6e, type: 3}
+  attack: {fileID: 8292828404451750907, guid: 52988b724b575da42b9b92c1bdd23b6e, type: 3}
