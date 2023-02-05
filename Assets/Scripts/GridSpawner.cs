@@ -10,7 +10,7 @@ public class GridSpawner : MonoBehaviour
     public int gridRows = 3;
     public int gridCols = 7;
     public float gridSpacing = 2.6f;
-    private Grid grid;
+    public Grid grid;
 
     // Start is called before the first frame update
     private void Start()
