@@ -6,7 +6,7 @@ using UnityEngine;
 public class Attacks : MonoBehaviour
 {
     public GameObject vineWarning;
-    public GameObject leafAttack;
+    public GameObject leafWarning;
     public GameObject logWarning;
     private Score scoreManager;
     private GridSpawner grid;
@@ -42,7 +42,7 @@ public class Attacks : MonoBehaviour
 
     public void onebythree(){
         x = Random.Range(0, grid.gridCols);
-        Instantiate(leafAttack, grid.returnGridPosition(x, 0) + new Vector3(0, 0, -10), Quaternion.identity);
+        Instantiate(leafWarning, grid.returnGridPosition(x, 0) + new Vector3(0, 0, -5), Quaternion.identity);
     }
 
     public void sevenbyone(){
@@ -56,7 +56,7 @@ public class Attacks : MonoBehaviour
         xList.Remove(x);
         foreach (var x in xList)
         {
-            Instantiate(leafAttack, grid.returnGridPosition(x, 0) + new Vector3(0, 0, -10), Quaternion.identity);
+            Instantiate(leafWarning, grid.returnGridPosition(x, 0) + new Vector3(0, 0, -5), Quaternion.identity);
         }
     }
 }
