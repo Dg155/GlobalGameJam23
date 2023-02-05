@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playerMovement : MonoBehaviour
@@ -14,6 +15,12 @@ public class playerMovement : MonoBehaviour
     public AudioClip attackedSFX;
     private Animator animator;
 
+
+    public GameObject Target1;
+    public GameObject Target2;
+    public GameObject Target3;
+    public GameObject Target4;
+    public GameObject Target5;
     int bossHealth = 5;
 
     // Start is called before the first frame update
@@ -68,8 +75,8 @@ public class playerMovement : MonoBehaviour
     {
         if(collision.tag == "Axe")
         {
-            AxeAttack();
-            Destroy(collision.gameObject);
+            AxeAttack(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
 
         if(collision.tag == "Attack" && !attackBuffer)
@@ -80,14 +87,24 @@ public class playerMovement : MonoBehaviour
             animator.SetBool("startBuffer", true);
         }
     }
-    void AxeAttack()
+    void AxeAttack(GameObject Axe)
     {
         bossHealth--;
-        Debug.Log("bossAttacked");
+        StartCoroutine(MoveAxe(0, Axe));
         if (bossHealth == 0)
         {
             Debug.Log("Boss dead");
         }
         
+    }
+    IEnumerator MoveAxe(float delayTime, GameObject axe)
+    {
+        Debug.Log("Start Coroutine");
+        if(bossHealth == 4)
+        {
+            Debug.Log("bossHealth = 5");
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target1.transform.position, 1.0f * Time.deltaTime);
+        }
+        yield return 1;
     }
 }
