@@ -16,22 +16,18 @@ public class Attacks : MonoBehaviour
     void Start()
     {
      gridObject = GameObject.FindGameObjectWithTag("Grid");
-        onebyone();
-        onebyone();
-        onebyone();
-        onebyone();
+     InvokeRepeating("onebyone", 1, 1.0f);
     }
     
     public void onebyone()
     {
-        
         grid=gridObject.GetComponent<GridSpawner>();
         x = Random.Range(0, grid.gridCols);
         y = Random.Range(0, grid.gridRows);
         spawnLocation = grid.returnGridPosition(x, y);
         Instantiate(oneSquareHit, spawnLocation, Quaternion.identity);
-        Destroy(gameObject, 1.0f);
     }
+
     // Update is called once per frame
     void Update()
     {
