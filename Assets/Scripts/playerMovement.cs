@@ -14,6 +14,8 @@ public class playerMovement : MonoBehaviour
     public AudioClip attackedSFX;
     private Animator animator;
 
+    int bossHealth = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -64,6 +66,12 @@ public class playerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.tag == "Axe")
+        {
+            AxeAttack();
+            Destroy(collision.gameObject);
+        }
+
         if(collision.tag == "Attack" && !attackBuffer)
         {
             scoreManager.AddScore(-100);
@@ -71,5 +79,15 @@ public class playerMovement : MonoBehaviour
             attackBuffer = true;
             animator.SetBool("startBuffer", true);
         }
+    }
+    void AxeAttack()
+    {
+        bossHealth--;
+        Debug.Log("bossAttacked");
+        if (bossHealth == 0)
+        {
+            Debug.Log("Boss dead");
+        }
+        
     }
 }
