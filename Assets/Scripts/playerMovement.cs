@@ -7,6 +7,7 @@ public class playerMovement : MonoBehaviour
 
     private GameObject gridObject;
     private GridSpawner grid;
+    private Score scoreManager;
     public int playerX = 3;
     public int playerY = 1;
 
@@ -14,6 +15,7 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         gridObject = GameObject.FindWithTag("Grid");
+        scoreManager = GameObject.FindWithTag("Score").GetComponent<Score>();
         grid = gridObject.GetComponent<GridSpawner>();
         setPlayerPos(playerX, playerY);
     }
@@ -49,5 +51,15 @@ public class playerMovement : MonoBehaviour
     private void setPlayerPos(int x, int y)
     {
         transform.position = grid.returnGridPosition(x, y);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Attack")
+        {
+            Debug.Log("attacked");
+            scoreManager.AddScore(-100);
+            //pass a number here (-100)
+        }
     }
 }
