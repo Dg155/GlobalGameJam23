@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
     [SerializeField]
     private int score;
+    private TMPro.TextMeshProUGUI scoreText;
 
     private void Start()
     {
+        scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<TextMeshProUGUI>();
         score = 1000;
+        scoreText.text = score.ToString();
     }
 
     public int getScore()
@@ -27,5 +31,6 @@ public class Score : MonoBehaviour
     public void AddScore(int x)
     {
         score += x;
+        scoreText.text = score.ToString();
     }
 }

@@ -7,6 +7,9 @@ TagManager:
   - Grid
   - Score
   - Attack
+  - ScoreText
+  - MusicPlayer
+  - SFXPlayer
   layers:
   - Default
   - TransparentFX

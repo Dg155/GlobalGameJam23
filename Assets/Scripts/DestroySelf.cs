@@ -5,7 +5,15 @@ using UnityEngine;
 public class DestroySelf : MonoBehaviour
 {
 
-    public float destoryTime = 1.0f;
+    void Start()
+    {
+        this.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+    public void EnableCollider()
+    {
+        this.GetComponent<BoxCollider2D>().enabled = true;
+    }
 
     public void EndMe()
     {

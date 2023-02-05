@@ -5,18 +5,21 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
 
-    private GameObject gridObject;
     private GridSpawner grid;
     private Score scoreManager;
+    public float attackBufferTime = 0.5f;
+    private bool attackBuffer = false;
     public int playerX = 3;
     public int playerY = 1;
+    public AudioClip attackedSFX;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
-        gridObject = GameObject.FindWithTag("Grid");
+        animator = GetComponent<Animator>();
         scoreManager = GameObject.FindWithTag("Score").GetComponent<Score>();
-        grid = gridObject.GetComponent<GridSpawner>();
+        grid =  GameObject.FindWithTag("Grid").GetComponent<GridSpawner>();
         setPlayerPos(playerX, playerY);
     }
 
@@ -53,13 +56,20 @@ public class playerMovement : MonoBehaviour
         transform.position = grid.returnGridPosition(x, y);
     }
 
+    public void resetAttackBuffer()
+    {
+        attackBuffer = false;
+        animator.SetBool("startBuffer", false);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Attack")
+        if(collision.tag == "Attack" && !attackBuffer)
         {
-            Debug.Log("attacked");
             scoreManager.AddScore(-100);
-            //pass a number here (-100)
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(attackedSFX);
+            attackBuffer = true;
+            animator.SetBool("startBuffer", true);
         }
     }
 }
