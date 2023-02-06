@@ -12,6 +12,7 @@ public class Score : MonoBehaviour
 
     public GameObject LoseScreen;
     public GameObject Player;
+    public AudioClip gameoverMusic;
 
     private void Start()
     {
@@ -32,6 +33,9 @@ public class Score : MonoBehaviour
             Time.timeScale = 0;
             Player.SetActive(false);
             LoseScreen.SetActive(true);
+            GameObject.FindWithTag("MusicPlayer").GetComponent<AudioSource>().Stop();
+            GameObject.FindWithTag("MusicPlayer").GetComponent<AudioSource>().PlayOneShot(gameoverMusic, 0.1f);
+            GameObject.FindWithTag("MusicPlayer").GetComponent<AudioSource>().Play();
         }
     }
     public void AddScore(int x)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
@@ -13,6 +14,9 @@ public class TextBox : MonoBehaviour
     public float characterPopupDelay = 0.1f;
     private bool finishedText;
     private bool skipText;
+    private Image cutSceneImage;
+    public Sprite secondImage;
+    public Sprite thirdImage;
     [SerializeField] string firstMessage;
     [SerializeField] string secondMessage;
     [SerializeField] string thirdMessage;
@@ -23,6 +27,8 @@ public class TextBox : MonoBehaviour
 
     void Start()
     {
+        cutSceneImage = GameObject.FindWithTag("CutSceneImage").GetComponent<Image>();
+        Debug.Log(cutSceneImage.sprite.name);
         finishedText = true;
         TM = GetComponentInChildren<TextMeshProUGUI>();
         SL = (SceneLoader)FindObjectOfType(typeof(SceneLoader));
@@ -61,6 +67,8 @@ public class TextBox : MonoBehaviour
         finishedText = false;
         skipText = false;
         gameObject.SetActive(true);
+        if (message == thirdMessage) {cutSceneImage.sprite = secondImage;}
+        if (message == sixthMessage) {cutSceneImage.sprite = thirdImage;}
         yield return StartCoroutine("DisplayText", message);
         yield return StartCoroutine("waitForKeyPress", KeyCode.Mouse0);
         if (message == lastMessage) { SL.LoadNextScene();}

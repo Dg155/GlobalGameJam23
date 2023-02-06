@@ -14,6 +14,8 @@ public class playerMovement : MonoBehaviour
     public int playerX = 3;
     public int playerY = 1;
     public AudioClip attackedSFX;
+    public AudioClip attackedTreeSFX;
+    public AudioClip movedSFX;
     private Animator animator;
 
     public GameObject[] Targets;
@@ -38,24 +40,28 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if (playerX <= 0) { return;}
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerX--;
             setPlayerPos(playerX, playerY);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             if (playerX >= grid.gridCols - 1) { return; }
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerX++;
             setPlayerPos(playerX, playerY);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             if (playerY >= grid.gridRows - 1) { return; }
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerY++;
             setPlayerPos(playerX, playerY);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             if (playerY <= 0) { return; }
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerY--;
             setPlayerPos(playerX, playerY);
         }
@@ -121,6 +127,7 @@ public class playerMovement : MonoBehaviour
             //axe.GetComponent<Animator>().enabled = false;
         }
         yield return new WaitForSeconds(animTime);
+        GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(attackedTreeSFX);
         GameObject chips = Instantiate(TreeHurt, curTarget.transform.position, Quaternion.identity);
         axe.GetComponent<Animator>().enabled = false;
 
