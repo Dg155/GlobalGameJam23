@@ -109,6 +109,7 @@ public class playerMovement : MonoBehaviour
         Debug.Log("Start Coroutine");
 
         GameObject curTarget = Targets[Targets.Length - bossHealth - 1];
+        Debug.Log(Targets.Length - bossHealth - 1);
         float elapsedTime = 0;
         while (elapsedTime < animTime)
         {
