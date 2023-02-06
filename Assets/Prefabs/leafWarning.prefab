@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7618957608806627095}
   m_Layer: 0
   m_Name: leafWarning
-  m_TagString: Untagged
+  m_TagString: Warning
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7578102425165794714}
   - component: {fileID: 5636721170512071256}
   - component: {fileID: 508643172649398266}
-  - component: {fileID: 8717175834273528240}
+  - component: {fileID: 673227927188545781}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -59,7 +59,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2885628433134222335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.012, y: 0.419, z: 0}
+  m_LocalPosition: {x: -0.228, y: 0.419, z: 0}
   m_LocalScale: {x: 0.9426079, y: 0.99604845, z: 0.15598843}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -134,7 +134,7 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &8717175834273528240
+--- !u!114 &673227927188545781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

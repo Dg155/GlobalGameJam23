@@ -9,7 +9,10 @@ public class WarningSpawner : MonoBehaviour
     
     public void spawnWarning()
     {
-        Instantiate(attack, this.transform.position, Quaternion.identity);
+        if (rootSFX.name == "LeafCrumple") {
+            Instantiate(attack, this.transform.position + new Vector3(0.3f, 0, 0), Quaternion.identity);
+        }
+        else {Instantiate(attack, this.transform.position, Quaternion.identity);}
         if (rootSFX.name == "Crunch"){
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(rootSFX, 0.5f);
         }

@@ -13,7 +13,7 @@ public class Axe : MonoBehaviour
     private void Start()
     {
         grid = GameObject.FindGameObjectWithTag("Grid").GetComponent<GridSpawner>();
-        InvokeRepeating("axeSpawned", 1, 20f);
+        InvokeRepeating("axeSpawned", 1, 27f);
     }
 
     public void axeSpawned()

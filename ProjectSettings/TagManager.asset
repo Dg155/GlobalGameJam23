@@ -12,6 +12,7 @@ TagManager:
   - SFXPlayer
   - Axe
   - CutSceneImage
+  - Warning
   layers:
   - Default
   - TransparentFX
