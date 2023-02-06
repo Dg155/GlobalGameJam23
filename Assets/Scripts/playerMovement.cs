@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.IMGUI.Controls.PrimitiveBoundsHandle;
 
 public class playerMovement : MonoBehaviour
 {
@@ -15,13 +16,13 @@ public class playerMovement : MonoBehaviour
     public AudioClip attackedSFX;
     private Animator animator;
 
+    public GameObject[] Targets;
 
-    public GameObject Target1;
-    public GameObject Target2;
-    public GameObject Target3;
-    public GameObject Target4;
-    public GameObject Target5;
     int bossHealth = 5;
+
+    public GameObject WinScreen;
+
+    public GameObject TreeHurt;
 
     // Start is called before the first frame update
     void Start()
@@ -93,6 +94,9 @@ public class playerMovement : MonoBehaviour
         StartCoroutine(MoveAxe(0, Axe));
         if (bossHealth == 0)
         {
+            Time.timeScale = 0;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            WinScreen.SetActive(true);
             Debug.Log("Boss dead");
         }
        
@@ -100,32 +104,24 @@ public class playerMovement : MonoBehaviour
     
     IEnumerator MoveAxe(float delayTime, GameObject axe)
     {
+        float animTime = 1.0f;
+        Vector2 startPostion = new Vector2(axe.transform.position.x, axe.transform.position.y);
         Debug.Log("Start Coroutine");
-        if(bossHealth == 4)
+
+        GameObject curTarget = Targets[Targets.Length - bossHealth - 1];
+        float elapsedTime = 0;
+        while (elapsedTime < animTime)
         {
-            Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target1.transform.position, Time.deltaTime);
+            Debug.Log(elapsedTime / animTime);
+            axe.GetComponent<Animator>().enabled = true;
+            axe.transform.position = Vector3.Lerp(startPostion, curTarget.transform.position, elapsedTime / animTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+            //axe.GetComponent<Animator>().enabled = false;
         }
-        if (bossHealth == 3)
-        {
-            Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target2.transform.position, Time.time);
-        }
-        if (bossHealth == 2)
-        {
-            Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target3.transform.position, Time.time);
-        }
-        if (bossHealth == 1)
-        {
-            Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target4.transform.position, Time.time);
-        }
-        if (bossHealth == 0)
-        {
-            Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target5.transform.position, Time.time);
-        }
-        yield return 1;
+        yield return new WaitForSeconds(animTime);
+        GameObject chips = Instantiate(TreeHurt, curTarget.transform.position, Quaternion.identity);
+        axe.GetComponent<Animator>().enabled = false;
+
     }
 }
