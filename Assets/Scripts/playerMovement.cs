@@ -81,7 +81,7 @@ public class playerMovement : MonoBehaviour
 
         if(collision.tag == "Attack" && !attackBuffer)
         {
-            scoreManager.AddScore(-100);
+            scoreManager.AddScore(-500);
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(attackedSFX);
             attackBuffer = true;
             animator.SetBool("startBuffer", true);
@@ -95,15 +95,36 @@ public class playerMovement : MonoBehaviour
         {
             Debug.Log("Boss dead");
         }
-        
+       
     }
+    
     IEnumerator MoveAxe(float delayTime, GameObject axe)
     {
         Debug.Log("Start Coroutine");
         if(bossHealth == 4)
         {
             Debug.Log("bossHealth = 5");
-            axe.transform.position = Vector3.Lerp(axe.transform.position, Target1.transform.position, 1.0f * Time.deltaTime);
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target1.transform.position, Time.deltaTime);
+        }
+        if (bossHealth == 3)
+        {
+            Debug.Log("bossHealth = 5");
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target2.transform.position, Time.time);
+        }
+        if (bossHealth == 2)
+        {
+            Debug.Log("bossHealth = 5");
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target3.transform.position, Time.time);
+        }
+        if (bossHealth == 1)
+        {
+            Debug.Log("bossHealth = 5");
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target4.transform.position, Time.time);
+        }
+        if (bossHealth == 0)
+        {
+            Debug.Log("bossHealth = 5");
+            axe.transform.position = Vector3.Lerp(axe.transform.position, Target5.transform.position, Time.time);
         }
         yield return 1;
     }
