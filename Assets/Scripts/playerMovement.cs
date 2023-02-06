@@ -17,14 +17,12 @@ public class playerMovement : MonoBehaviour
     private Animator animator;
 
     public GameObject[] Targets;
-    public GameObject Target1;
-    public GameObject Target2;
-    public GameObject Target3;
-    public GameObject Target4;
-    public GameObject Target5;
+
     int bossHealth = 5;
 
     public GameObject WinScreen;
+
+    public GameObject TreeHurt;
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +120,8 @@ public class playerMovement : MonoBehaviour
             //axe.GetComponent<Animator>().enabled = false;
         }
         yield return new WaitForSeconds(animTime);
+        GameObject chips = Instantiate(TreeHurt, curTarget.transform.position, Quaternion.identity);
         axe.GetComponent<Animator>().enabled = false;
+
     }
 }
