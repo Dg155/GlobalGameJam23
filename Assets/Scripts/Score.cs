@@ -8,6 +8,10 @@ public class Score : MonoBehaviour
     [SerializeField]
     private int score;
     private TMPro.TextMeshProUGUI scoreText;
+   
+
+    public GameObject LoseScreen;
+    public GameObject Player;
 
     private void Start()
     {
@@ -25,7 +29,9 @@ public class Score : MonoBehaviour
     {
         if(score <= 0)
         {
-            //DIE
+            Time.timeScale = 0;
+            Player.SetActive(false);
+            LoseScreen.SetActive(true);
         }
     }
     public void AddScore(int x)

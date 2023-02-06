@@ -20,6 +20,16 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
+    public void Return()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     /*public void OpenOptions()
     {
         OptionsMenu.SetActive(true);
