@@ -1599,7 +1599,7 @@ MonoBehaviour:
   attackBufferTime: 0.5
   playerX: 3
   playerY: 1
-  attackedSFX: {fileID: 8300000, guid: 4da62aeb0ccbdec4ca500d3495df7f17, type: 3}
+  attackedSFX: {fileID: 8300000, guid: 61cb9600017a6e143983b9e05b60d5af, type: 3}
   Target1: {fileID: 1150352218}
   Target2: {fileID: 133420903}
   Target3: {fileID: 1087732679}
@@ -2404,7 +2404,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ed3aba5929ed4c94da097b6f3560b858, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

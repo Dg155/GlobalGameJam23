@@ -10,7 +10,12 @@ public class WarningSpawner : MonoBehaviour
     public void spawnWarning()
     {
         Instantiate(attack, this.transform.position, Quaternion.identity);
-        GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(rootSFX, 0.5f);
+        if (rootSFX.name == "Crunch"){
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(rootSFX, 0.5f);
+        }
+        else{
+            GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(rootSFX, 1f);
+        }
         Destroy(this.gameObject);
     }
 }

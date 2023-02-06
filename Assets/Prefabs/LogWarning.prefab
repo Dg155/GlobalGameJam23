@@ -114,5 +114,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f16b777da910bc4bbbd7b8c3c5aee1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rootSFX: {fileID: 8300000, guid: 8a9e6d5d5f99d3644adc3ce668419475, type: 3}
+  rootSFX: {fileID: 8300000, guid: 94b06482e178ea9419acfb030d7d3011, type: 3}
   attack: {fileID: 8292828404451750907, guid: 52988b724b575da42b9b92c1bdd23b6e, type: 3}
