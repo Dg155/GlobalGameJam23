@@ -16,6 +16,12 @@ public class playerMovement : MonoBehaviour
     public AudioClip attackedTreeSFX;
     public AudioClip movedSFX;
     private Animator animator;
+    public float dashTime;
+    public float distanceBetweenImages;
+    private float dashTimeLeft;
+    private float lastImageXpos;
+    private float lastDash;
+    private bool isDashing;
 
     public GameObject[] Targets;
 
@@ -36,12 +42,14 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
+        CheckDash();
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if (playerX <= 0) { return;}
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerX--;
             setPlayerPos(playerX, playerY);
+            Dash();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
@@ -49,6 +57,7 @@ public class playerMovement : MonoBehaviour
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerX++;
             setPlayerPos(playerX, playerY);
+            Dash();
         }
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -56,6 +65,7 @@ public class playerMovement : MonoBehaviour
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerY++;
             setPlayerPos(playerX, playerY);
+            Dash();
         }
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
@@ -63,6 +73,29 @@ public class playerMovement : MonoBehaviour
             GameObject.FindWithTag("SFXPlayer").GetComponent<AudioSource>().PlayOneShot(movedSFX, 0.5f);
             playerY--;
             setPlayerPos(playerX, playerY);
+            Dash();
+        }
+    }
+
+    private void Dash(){
+        isDashing = true;
+        dashTimeLeft = dashTime;
+        PlayerAfterImagePool.Instance.GetFromPool();
+        lastImageXpos = transform.position.x;
+    }
+
+    private void CheckDash(){
+        if (isDashing){
+            if (dashTimeLeft > 0){
+                dashTimeLeft -= Time.deltaTime;
+                if (Mathf.Abs(lastImageXpos - transform.position.x) >= distanceBetweenImages){
+                    PlayerAfterImagePool.Instance.GetFromPool();
+                    lastImageXpos = transform.position.x;
+                }
+            }
+            else {
+                isDashing = false;
+            }
         }
     }
 
@@ -99,6 +132,9 @@ public class playerMovement : MonoBehaviour
         StartCoroutine(MoveAxe(0, Axe));
         if (bossHealth == 0)
         {
+            foreach (GameObject warning in GameObject.FindGameObjectsWithTag("Warning")){
+                Destroy(warning);
+            }
             Time.timeScale = 0;
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
             WinScreen.SetActive(true);

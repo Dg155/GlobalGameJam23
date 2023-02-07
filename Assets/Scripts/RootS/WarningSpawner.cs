@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WarningSpawner : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class WarningSpawner : MonoBehaviour
     
     public void spawnWarning()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 2) {Destroy(this.gameObject); return;}
         if (rootSFX.name == "LeafCrumple") {
             Instantiate(attack, this.transform.position + new Vector3(0.3f, 0, 0), Quaternion.identity);
         }

@@ -20,6 +20,6 @@ public class Axe : MonoBehaviour
     {
         x = Random.Range(0, grid.gridCols);
         y = Random.Range(0, grid.gridRows);
-        Instantiate(axeItem, grid.returnGridPosition(x, y), Quaternion.identity);
+        Instantiate(axeItem, grid.returnGridPosition(x, y) + new Vector3(0, 0, -5), Quaternion.identity);
     }
 }

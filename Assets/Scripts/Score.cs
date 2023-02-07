@@ -30,6 +30,9 @@ public class Score : MonoBehaviour
     {
         if(score <= 0)
         {
+            foreach (GameObject warning in GameObject.FindGameObjectsWithTag("Warning")){
+                Destroy(warning);
+            }
             Time.timeScale = 0;
             Player.SetActive(false);
             LoseScreen.SetActive(true);
