@@ -10,7 +10,7 @@ public class PlayerAfterImageSprite : MonoBehaviour
     private float alpha;
     [SerializeField]
     private float alphaSet = 0.8f;
-    private float alphaMultiplier = 0.85f;
+    private float alphaMultiplier = 0.90f;
 
     private Transform player;
 
@@ -37,6 +37,7 @@ public class PlayerAfterImageSprite : MonoBehaviour
         SR.color = color;
 
         if (Time.time >= (timeActivated + activeTime)){
+            Debug.Log("added back to pool");
             PlayerAfterImagePool.Instance.AddToPool(gameObject);
         }
     }

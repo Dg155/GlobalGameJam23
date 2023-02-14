@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Threading.Tasks;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class Attacks : MonoBehaviour
 {
@@ -28,8 +29,10 @@ public class Attacks : MonoBehaviour
     private async Task StartWaves(){
         await Wave(1);
         Debug.Log("Wave 1 complete");
+        if (SceneManager.GetActiveScene().buildIndex != 2){return;}
         await Wave(2);
         Debug.Log("Wave 2 complete");
+        if (SceneManager.GetActiveScene().buildIndex != 2){return;}
         await Wave(3);
         Debug.Log("Wave 3 complete");
     }
@@ -65,6 +68,7 @@ public class Attacks : MonoBehaviour
         float timeBefore;
         for (int i = 0; i < attackAmount; i++)
         {
+            if (SceneManager.GetActiveScene().buildIndex != 2){return;}
             spawnInterval = Random.Range(attackDelaymin, attackDelayMax);
             timeBefore = 0f;
             while (timeBefore < spawnInterval) {timeBefore += Time.deltaTime; await Task.Yield();}

@@ -16,12 +16,8 @@ public class playerMovement : MonoBehaviour
     public AudioClip attackedTreeSFX;
     public AudioClip movedSFX;
     private Animator animator;
-    public float dashTime;
-    public float distanceBetweenImages;
-    private float dashTimeLeft;
-    private float lastImageXpos;
-    private float lastDash;
-    private bool isDashing;
+    private Vector3 lastImagepos;
+    public int numberOfImages = 10;
 
     public GameObject[] Targets;
 
@@ -42,7 +38,6 @@ public class playerMovement : MonoBehaviour
 
     void Update()
     {
-        CheckDash();
         if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if (playerX <= 0) { return;}
@@ -78,25 +73,13 @@ public class playerMovement : MonoBehaviour
     }
 
     private void Dash(){
-        isDashing = true;
-        dashTimeLeft = dashTime;
-        PlayerAfterImagePool.Instance.GetFromPool();
-        lastImageXpos = transform.position.x;
-    }
-
-    private void CheckDash(){
-        if (isDashing){
-            if (dashTimeLeft > 0){
-                dashTimeLeft -= Time.deltaTime;
-                if (Mathf.Abs(lastImageXpos - transform.position.x) >= distanceBetweenImages){
-                    PlayerAfterImagePool.Instance.GetFromPool();
-                    lastImageXpos = transform.position.x;
-                }
-            }
-            else {
-                isDashing = false;
-            }
+        for (int i = 2; i < numberOfImages; i++)
+        {
+            var instance = PlayerAfterImagePool.Instance.GetFromPool();
+            lastImagepos = Vector3.Lerp(lastImagepos, transform.position, (float)i/numberOfImages);
+            instance.transform.position = lastImagepos;
         }
+        lastImagepos = transform.position;
     }
 
     private void setPlayerPos(int x, int y)
